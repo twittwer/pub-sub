@@ -1,0 +1,22 @@
+{
+  "name": "pub-sub",
+  "version": "0.2.0",
+  "description": "Pub/Sub interface for Node.js (needs underlying transporter)",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.houston.softwaregrp.net:andreas-weber/pub-sub.git"
+  },
+  "author": {
+    "name": "Tobias Wittwer",
+    "url": "https://github.com/twittwer"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.6.1",
+    "eslint-config-es": "^0.8.11"
+  }
+}
