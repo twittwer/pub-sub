@@ -1,14 +1,14 @@
 # pub-sub
 
-> Pub/Sub interface for Node.js (needs underlying [transporter](https://github.houston.softwaregrp.net/andreas-weber/pub-sub#pubsubtransporter---pubsub-transporter-interface), like [pub-sub-transporter-redis](https://github.houston.softwaregrp.net/andreas-weber/pub-sub-transporter-redis))
+> Pub/Sub interface for Node.js (needs underlying [transporter](https://github.com:twittwer/pub-sub#pubsubtransporter---pubsub-transporter-interface), like [pub-sub-transporter-redis](https://github.com:twittwer/pub-sub-transporter-redis))
 
-# Installation
-```
-npm install git+ssh://git@github.houston.softwaregrp.net:andreas-weber/pub-sub.git
-```
+## Installation
 
-# Usage
-```
+`npm install git+ssh://git@github.com:twittwer/pub-sub.git`
+
+## Usage
+
+```javascript
 const pubSub = require( 'pub-sub' ),
     pubSubTransporterRedis = require( 'pub-sub-transporter-redis' ),
     redis = require( 'redis' );
@@ -41,13 +41,15 @@ const unsubscribe = pubSub.subscribe( 'news', ( channel, data ) => {
 unsubscribe();
 ```
 
-# Reference
+## Reference
+
 > required **parameters** are written bold  
 > optional *parameters* are written italic or marked with `[`square brackets`]`  
 
-## Methods
+### Methods
 
-### pubSub.initialize(config): void
+#### pubSub.initialize(config): void
+
 Initializes Pub/Sub Module  
 Connects to event transporter and configures pub/sub module.
 
@@ -55,7 +57,8 @@ Connects to event transporter and configures pub/sub module.
 | ------ | -------------- | -------------------- |
 | config | `moduleConfig` | module configuration |
 
-### pubSub.publish(channel, data): void
+#### pubSub.publish(channel, data): void
+
 Publishes Data to Channel
 
 | Param   | Type     | Description                          |
@@ -63,7 +66,8 @@ Publishes Data to Channel
 | channel | `string` | name of targeted channel             |
 | data    | `object` | object (JSON) to publish via channel |
 
-### pubSub.subscribe(channel, subscriptionHandler): function
+#### pubSub.subscribe(channel, subscriptionHandler): function
+
 Registers Subscription Handler for Channel  
 Adds subscription handler to registry and   
 subscribes transporter to channel, if it wasn't done before.
@@ -75,9 +79,9 @@ subscribes transporter to channel, if it wasn't done before.
 | channel             | `string`      | name of channel, the handler should be bound to |
 | subscriptionHandler | `dataHandler` | handler function for channel's incoming data    |
 
-## Custom Type Definitions
+### Custom Type Definitions
 
-### `moduleConfig` - Module Configuration
+#### `moduleConfig` - Module Configuration
 
 | Param               | Type                | Description                                                                                                  |
 | ------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -89,9 +93,10 @@ subscribes transporter to channel, if it wasn't done before.
 > *) e.g. 'pubSub:' causes 'news'->'pubSub:news'
 > **) e.g. 'pubSub:' causes 'pubSub:news'->'news'
 
-### `pubSubTransporter` - Pub/Sub Transporter Interface
+#### `pubSubTransporter` - Pub/Sub Transporter Interface
 
-#### pubSubTransporter.connect(dataHandler): void
+##### pubSubTransporter.connect(dataHandler): void
+
 Boots up Transporter  
 Establishes internally needed connections,  
 sets event listeners and  
@@ -103,7 +108,8 @@ performs any other tasks initially needed by transporter.
 
 > *) is used to expose events from transporter module to pub/sub module
 
-#### pubSubTransporter.publish(channel, data): void
+##### pubSubTransporter.publish(channel, data): void
+
 Publishes Data to Channel  
 Does optionally preprocessing of data and emits it to specified channel.
 
@@ -112,21 +118,24 @@ Does optionally preprocessing of data and emits it to specified channel.
 | channel | `string` | name of targeted channel             |
 | data    | `object` | object (JSON) to publish via channel |
 
-#### pubSubTransporter.subscribe(channel): void
+##### pubSubTransporter.subscribe(channel): void
+
 Subscribes Transporter to Channel
 
 | Param   | Type     | Description                                                       |
 | ------- | -------- | ----------------------------------------------------------------- |
 | channel | `string` | name of channel, whose events should be passed on to data handler |
 
-#### pubSubTransporter.unsubscribe(channel): void
+##### pubSubTransporter.unsubscribe(channel): void
+
 Unsubscribes Transporter from Channel
 
 | Param   | Type     | Description                                                               |
 | ------- | -------- | ------------------------------------------------------------------------- |
 | channel | `string` | name of channel, whose events shouldn't be passed to data handler anymore |
 
-### `dataHandler` - Data Handler Function
+#### `dataHandler` - Data Handler Function
+
 Processes Incoming Events  
 Handles events of subscribed channels.
 
